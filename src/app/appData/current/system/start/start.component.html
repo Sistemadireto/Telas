@@ -1,0 +1,44 @@
+<include>
+
+
+
+  <div class="container">
+    <div class="lateral">
+
+      <input class="inputSearch" [(ngModel)]="searchText" placeholder="Procurar por:"
+        (ngModelChange)="goSearch($event)">
+
+      <div *ngIf="desc" class="info">
+        <h2 class="title">{{desc.value.title}}</h2>
+        <p class="desc">{{desc.value.desc}}</p>
+        <div class="plus">
+          <button mat-stroked-button [color]="find(authService.apps, desc.value.id) ? 'warn' : 'primary'"
+            (click)="install(find(authService.apps, desc.value.id) ? 'uninstall' : 'install', desc.value)">
+            {{find(authService.apps, desc.value.id) ? 'remover' : 'instalar'}}
+          </button>
+          <p>
+            <b>author:</b> {{desc.value.author}}
+            <br>
+            <b>release:</b> {{ dateConverter(desc.value.date) | date : 'dd/MM/yyyy'}}
+            <br>
+            <i class="appid">APPID: {{ desc.value.id }}</i>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="apps">
+      <div class="appTile" *ngFor="let app of appStore | keyvalue" (click)="desc = app;"
+        [ngClass]="(app.value.desc | color)">
+        <div class="left">
+          <i class="material-icons">{{app.value.ico}}</i>
+        </div>
+        <div class="right">
+          <b class="title">{{app.value.title}}</b>
+          <p class="desc">{{app.value.desc}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</include>

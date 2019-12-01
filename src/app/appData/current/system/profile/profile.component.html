@@ -1,0 +1,122 @@
+<include>
+
+  <div class="top">
+    <picture
+      [ngStyle]="{ 'background': '#fff url(' + userData.photoURL + ' ) no-repeat center center /cover' }">
+      <div class="material-icons insert_photo">camera_alt</div>
+    </picture>
+    <div class="topDetail">
+      <ul class="userName">
+        <li>{{ (userData.displayName) ? userData.displayName : 'Usuário' }}</li>
+      </ul>
+      <ul class="userEmail">
+        <li>{{ userData.email }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class=bottom>
+
+    <div class="bottomDetail">
+      <ul class="userID">
+        <li>UID: {{ userData.uid }}</li>
+      </ul>
+      <ul class="userVerified" [ngClass]="[(userData.emailVerified) ? 'green' : 'red']">
+        <li>{{ (userData.emailVerified) ? 'E-mail verified' : 'E-mail not verified' }}</li>
+      </ul>
+    </div>
+
+    <div class="rTable">
+      <div class="rTableRow">
+        <div class="rTableCell title">
+          <div>Nome completo</div>
+        </div>
+        <div class="rTableCell">
+          <div>
+            <input type="text" [(ngModel)]="userData.displayName" placeholder="Usuário" />
+          </div>
+        </div>
+        <div class="rTableCell">
+          <div class="link">Alterar</div>
+        </div>
+      </div>
+
+      <div class="rTableRow">
+        <div class="rTableCell title">
+          <div>CPF/CNPJ</div>
+        </div>
+        <div class="rTableCell">
+          <div>
+            <input type="text" [(ngModel)]="userData.document" placeholder="01234567890" />
+          </div>
+        </div>
+        <div class="rTableCell">
+          <div class="link">Alterar</div>
+        </div>
+      </div>
+
+      <div class="rTableRow">
+        <div class="rTableCell title">
+          <div>Contato</div>
+        </div>
+        <div class="rTableCell">
+          <div>
+            <input type="text" [(ngModel)]="userData.phoneNumber" placeholder="01234567890" />
+          </div>
+        </div>
+        <div class="rTableCell">
+          <div class="link">Alterar</div>
+        </div>
+      </div>
+
+      <div class="rTableRow divisor">
+        <div class="rTableCell title">
+          <div>Nascimento</div>
+        </div>
+        <div class="rTableCell">
+          <div>
+            <input type="date" [(ngModel)]="userData.birthday" />
+          </div>
+        </div>
+        <div class="rTableCell">
+          <div class="link">Alterar</div>
+        </div>
+      </div>
+
+      <div class="rTableRow">
+        <div class="rTableCell title">
+          <div>E-mail</div>
+        </div>
+        <div class="rTableCell">
+          <div>
+            {{ userData.email }}
+          </div>
+        </div>
+        <div class="rTableCell"> </div>
+      </div>
+
+      <div class="rTableRow">
+        <div class="rTableCell title">
+          <div>Senha</div>
+        </div>
+        <div class="rTableCell">
+          <div>***********</div>
+        </div>
+        <div class="rTableCell">
+          <div class="link">Alterar</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <button mat-mini-fab="delete_forever" (click)="deleteAccount()" color="warn">
+    <mat-icon>delete_forever</mat-icon>
+  </button>
+
+  <button mat-mini-fab="done" (click)="save()" color="primary">
+    <mat-icon>done</mat-icon>
+  </button>
+
+</include>

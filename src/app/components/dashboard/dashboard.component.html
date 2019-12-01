@@ -1,0 +1,110 @@
+<workspace class="workspace">
+
+  <!-- DEFAULT DCB CLOCK APP -->
+  <app-dcb></app-dcb>
+
+  <app-fotos *ngIf="checkApp('fotos')" class="app TT" cdkDrag cdkDragBoundary=".workspace"
+    [routerLink]="['/dashboard','apps','fotos']" (click)="appDataService.openApp('fotos');"
+    [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/fotos'],false:'closed'}[checkApp('fotos')]]"
+    [style.z-index]="appDataService.appData.appsOpened.indexOf('fotos')+1"
+    [ngStyle]="appDataService.appData.appSettings.fotos.style">
+  </app-fotos>
+
+  <app-expense *ngIf="checkApp('expense')" class="app TT" cdkDrag cdkDragBoundary=".workspace"
+    [routerLink]="['/dashboard','apps','expense']" (click)="appDataService.openApp('expense');"
+    [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/expense'],false:'closed'}[checkApp('expense')]]"
+    [style.z-index]="appDataService.appData.appsOpened.indexOf('expense')+1"
+    [ngStyle]="appDataService.appData.appSettings.expense.style">
+  </app-expense>
+
+  <app-stockmanager *ngIf="checkApp('stockmanager')" class="app TT" cdkDrag cdkDragBoundary=".workspace"
+    [routerLink]="['/dashboard','apps','stockmanager']" (click)="appDataService.openApp('stockmanager');"
+    [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/stockmanager'],false:'closed'}[checkApp('stockmanager')]]"
+    [style.z-index]="appDataService.appData.appsOpened.indexOf('stockmanager')+1"
+    [ngStyle]="appDataService.appData.appSettings.stockmanager.style">
+  </app-stockmanager>
+
+  <app-os *ngIf="checkApp('os')" class="app TT" cdkDrag cdkDragBoundary=".workspace"
+    [routerLink]="['/dashboard','apps','os']" (click)="appDataService.openApp('os');"
+    [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/os'],false:'closed'}[checkApp('os')]]"
+    [style.z-index]="appDataService.appData.appsOpened.indexOf('os')+1"
+    [ngStyle]="appDataService.appData.appSettings.os.style">
+  </app-os>
+
+  <app-ativuz *ngIf="checkApp('ativuz')" class="app TT" cdkDrag cdkDragBoundary=".workspace"
+    [routerLink]="['/dashboard','apps','ativuz']" (click)="appDataService.openApp('ativuz');"
+    [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/ativuz'],false:'closed'}[checkApp('ativuz')]]"
+    [style.z-index]="appDataService.appData.appsOpened.indexOf('ativuz')+1"
+    [ngStyle]="appDataService.appData.appSettings.ativuz.style">
+  </app-ativuz>
+
+  <app-system *ngIf="checkApp('system')" class="app TT" cdkDrag cdkDragBoundary=".workspace"
+    [routerLink]="['/dashboard','apps','system']" (click)="appDataService.openApp('system');"
+    [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/system'],false:'closed'}[checkApp('system')]]"
+    [style.z-index]="appDataService.appData.appsOpened.indexOf('system')+1"
+    [ngStyle]="appDataService.appData.appSettings.system.style">
+  </app-system>
+
+  <app-media-player *ngIf="checkApp('mediaPlayer')" class="app TT" cdkDrag cdkDragBoundary=".workspace"
+    [routerLink]="['/dashboard','apps','mediaPlayer']" (click)="appDataService.openApp('mediaPlayer');"
+    [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/mediaPlayer'],false:'closed'}[checkApp('mediaPlayer')]]"
+    [style.z-index]="appDataService.appData.appsOpened.indexOf('mediaPlayer')+1"
+    [ngStyle]="appDataService.appData.appSettings.mediaPlayer.style">
+  </app-media-player>
+
+  <app-calendar *ngIf="checkApp('calendar')" class="app TT" cdkDrag cdkDragBoundary=".workspace"
+    [routerLink]="['/dashboard','apps','calendar']" (click)="appDataService.openApp('calendar');"
+    [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/calendar'],false:'closed'}[checkApp('calendar')]]"
+    [style.z-index]="appDataService.appData.appsOpened.indexOf('calendar')+1"
+    [ngStyle]="appDataService.appData.appSettings.calendar.style">
+  </app-calendar>
+
+  <app-clientes *ngIf="checkApp('clientes')" class="app TT" cdkDrag cdkDragBoundary=".workspace"
+    [routerLink]="['/dashboard','apps','clientes']" (click)="appDataService.openApp('clientes');"
+    [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/clientes'],false:'closed'}[checkApp('clientes')]]"
+    [style.z-index]="appDataService.appData.appsOpened.indexOf('clientes')+1"
+    [ngStyle]="appDataService.appData.appSettings.clientes.style">
+  </app-clientes>
+
+</workspace>
+
+<mainmenu>
+
+  <!-- LOGOUT BUTTON -->
+  <button mat-icon-button color="warn" id="power_off" (click)="authService.SignOut()">
+    <mat-icon>power_settings_new</mat-icon>
+  </button>
+
+  <!-- MENU BACKGROUND -->
+  <div class="perspective TT"></div>
+
+  <buttons>
+    <!-- MENU BUTTONS -->
+    <div *ngFor="let app of authService.apps | keyvalue" class="alt" (click)="openApp(app.value.name)">
+      <div class="altInner">{{app.value.title}}</div>
+      <div class="ico">
+        <i class="material-icons-round">{{app.value.ico}}</i>
+      </div>
+      <div class="shaddowHolder">
+        <div class="shaddow TT"
+          [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/'+app.value.name],false:'closed'}[checkApp(app.value.name)]]">
+        </div>
+      </div>
+    </div>
+
+    <!-- DEFAULT SETTINGS BUTTON -->
+    <div class="alt" (click)="openApp('system')">
+      <div class="altInner">Configurações</div>
+      <div class="ico">
+        <i class="material-icons-round">settings_applications</i>
+      </div>
+      <div class="shaddowHolder">
+        <div class="shaddow TT"
+          [ngClass]="[{true:{true:'selected',false:'unselected'}[router.url=='/dashboard/apps/system'],false:'closed'}[checkApp('system')]]">
+        </div>
+      </div>
+    </div>
+
+  </buttons>
+
+</mainmenu>

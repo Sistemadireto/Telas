@@ -1,0 +1,40 @@
+<div class="appTitle">Ativuz</div>
+
+<toolbar>
+  <buttons>
+    <button (click)="input.click();" class="alt">
+      <i class="material-icons">note_add</i>
+      <div class="altInner">Add file</div>
+    </button>
+    <button class="alt" (click)="closeApp('ativuz');">
+      <i class="material-icons">cancel</i>
+      <div class="altInner">Fechar</div>
+    </button>
+  </buttons>
+</toolbar>
+
+<content>
+  <include>
+
+    <form #f="ngForm" (ngSubmit)="send(f)">
+      <input #input ngModel required name="file" class="hide" id="ativuz_upload" type="file" accept=".pdf,.rtf,.plain"
+        (change)="onFileChange($event)" />
+      <mat-form-field>
+        <input matInput name="name" ngModel required #name="ngModel" placeholder="Nome do titular">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="cpf" ngModel required #cpf="ngModel" placeholder="CPF" mask="000.000.000-00">
+      </mat-form-field>
+      <button mat-stroked-button color="primary" type="submit" [disabled]="f.invalid">Salvar</button>
+    </form>
+
+    <div>
+      <div *ngFor="let dat of data" style="border-bottom: 1px solid #2a2a2a;">
+        {{ dat.name }}: {{ dat.cpf }}
+        <br>
+        {{ dat.file }}
+      </div>
+    </div>
+
+  </include>
+</content>

@@ -1,0 +1,58 @@
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+
+  5% {
+    display: block;
+  }
+
+  80% {
+    opacity: 0;
+  }
+
+  100% {
+    display: none;
+  }
+}
+
+#spin.TT {
+  animation: spin 1.5s infinite linear;
+}
+
+#spin {
+  width: 240px;
+  height: 240px;
+  border-radius: 100%;
+  position: absolute;
+  margin: 0 auto;
+  left: calc(50% - 120px);
+  top: calc(50% - 120px);
+}
+
+splashscreen.TT {
+  transition: opacity 0.5s cubic-bezier(0.76, 0.05, 0.76, 0.05) 0s, display 0.5s cubic-bezier(0.76, 0.05, 0.76, 0.05) 0s;
+  animation-fill-mode: forwards;
+  animation: fade 2.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+splashscreen {
+  z-index: 9999;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0 auto;
+  background: #9a9a9a;
+}

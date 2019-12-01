@@ -1,0 +1,19 @@
+:host {
+  content {
+    background: rgba(189, 189, 189, 0.9);
+    width: 732px;
+    height: 457px;
+
+    include {
+      padding: 36px 12px 0;
+
+      .hide {
+        display: none;
+        position: absolute;
+        visibility: hidden;
+        height: 0;
+        width: 0;
+      }
+    }
+  }
+}

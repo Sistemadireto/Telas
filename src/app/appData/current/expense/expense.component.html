@@ -1,0 +1,133 @@
+<div class="expenseTitle">
+  <div class="menu">
+    <div>Perfil padrão</div>
+    <button>
+      <i class="material-icons-round">keyboard_arrow_down</i>
+    </button>
+  </div>
+
+  <br>
+
+  <div class="month">
+    <button (click)="month('today')">
+      <i class="material-icons-round">today</i>
+    </button>
+    <button (click)="month('minus')">
+      <i class="material-icons-round">keyboard_arrow_left</i>
+    </button>
+    <div class="title">
+      <span>{{ config.date.months[config.date.selected.month] }} - {{ config.date.selected.year }}</span>
+    </div>
+    <button (click)="month('plus')">
+      <i class="material-icons-round">keyboard_arrow_right</i>
+    </button>
+    <button>
+      <i class="material-icons-round">view_week</i>
+    </button>
+  </div>
+</div>
+
+<toolbar>
+  <buttons>
+    <button class="alt" (click)="config.viewMode='home';">
+      <i class="material-icons-round">home</i>
+      <div class="altInner">Home</div>
+    </button>
+    <button class="alt" (click)="config.viewMode='help';">
+      <i class="material-icons-round">help</i>
+      <div class="altInner">Ajuda</div>
+    </button>
+    <button class="alt" (click)="config.viewMode='edit';">
+      <i class="material-icons-round">build</i>
+      <div class="altInner">Ajustes</div>
+    </button>
+    <button (click)="closeApp('expense');" class="alt">
+      <i class="material-icons-round">cancel</i>
+      <div class="altInner">Fechar</div>
+    </button>
+  </buttons>
+</toolbar>
+
+<content [ngClass]="{'home':'b_blue01', 'edit':'b_aqua', 'help':'b_purple'}[config.viewMode]">
+
+  <include [ngClass]="{'home':'low', 'edit':'high', 'help':'high'}[config.viewMode]">
+    <div *ngIf="config.viewMode=='home'">
+      <div class="top">
+        <div class="left">
+          <button class="ico">
+            <i class="material-icons-outlined">work_outline</i>
+          </button>
+          <div>
+            <span class="title">Saldo</span>
+            <div class="value">R$ 1.234,00</div>
+          </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="right">
+          <button class="ico">
+            <i class="material-icons-outlined">account_balance_wallet</i>
+          </button>
+          <div>
+            <span class="title">Balanço</span>
+            <div class="value">R$ 1.234,00</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <div class="details" *ngFor="let resOuter of data | orderBy:'-timestamp' | groupBy:'timestamp'">
+          <h4>{{ resOuter.key | date:'d/M - EEEE' }}</h4>
+          <div class="info" *ngFor="let res of resOuter.value">
+            <div class="left">
+              <i class="material-icons" [ngClass]="res.color">{{ res.ico }}</i>
+            </div>
+            <div class="center">
+              <div>
+                <span>{{ res.title }}</span>
+              </div>
+              <div class="desc">
+                <span>{{ res.desc }}</span>
+              </div>
+            </div>
+            <div class="right">
+              <span>{{ res.val | currency : 'BRL' : 'symbol' : '1.2-2' : 'pt' }}</span>
+              <i class="material-icons">remove_circle</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="config.viewMode=='edit'">
+      <div class="top">
+        <div class="center">
+          <button class="ico">
+            <i class="material-icons-outlined">build</i>
+          </button>
+          <div>
+            <span class="title">Ajustes</span>
+            <div class="value">Configurações</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="config.viewMode=='help'">
+      <div class="top">
+        <div class="center">
+          <button class="ico">
+            <i class="material-icons-outlined">help</i>
+          </button>
+          <div>
+            <span class="title">Ajuda</span>
+            <div class="value">Assistente</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </include>
+
+</content>

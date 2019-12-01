@@ -1,0 +1,97 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,900");
+@import "scss/materialdesignicons";
+@import "scss/appData";
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background: #292929;
+}
+
+button,
+[type="button"] {
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+}
+
+button,
+[type="button"],
+[type="submit"],
+[type="text"],
+[type="password"],
+[type="email"],
+[type="number"] {
+  font-size: 1rem;
+}
+
+.bg-a,
+.bg-n {
+  background: rgb(245, 0, 114);
+  color: rgba(250, 250, 250, 0.85);
+}
+.bg-b,
+.bg-o {
+  background: rgb(239, 189, 27);
+  color: rgba(0, 0, 0, 0.7);
+}
+.bg-c,
+.bg-p {
+  background: rgb(87, 214, 75);
+  color: rgba(0, 0, 0, 0.7);
+}
+.bg-d,
+.bg-q {
+  background: rgb(252, 69, 69);
+  color: rgba(0, 0, 0, 0.7);
+}
+.bg-e,
+.bg-r {
+  background: rgb(69, 129, 252);
+  color: rgba(0, 0, 0, 0.7);
+}
+.bg-f,
+.bg-s {
+  background: rgb(15, 15, 15);
+  color: rgba(255, 255, 255, 0.7);
+}
+.bg-g,
+.bg-t {
+  background: rgb(239, 27, 228);
+  color: rgba(255, 255, 255, 0.7);
+}
+.bg-h,
+.bg-u {
+  background: rgb(239, 119, 27);
+  color: rgba(0, 0, 0, 0.7);
+}
+.bg-i,
+.bg-v {
+  background: rgb(22, 212, 198);
+  color: rgba(0, 0, 0, 0.7);
+}
+.bg-j,
+.bg-w {
+  background: rgb(125, 22, 212);
+  color: rgba(255, 255, 255, 0.7);
+}
+.bg-k,
+.bg-x {
+  background: rgb(100, 53, 15);
+  color: rgba(255, 255, 255, 0.7);
+}
+.bg-l,
+.bg-y {
+  background: rgb(128, 128, 128);
+  color: rgba(0, 0, 0, 0.7);
+}
+.bg-m,
+.bg-z {
+  background: rgb(74, 115, 0);
+  color: rgba(255, 255, 255, 0.7);
+}

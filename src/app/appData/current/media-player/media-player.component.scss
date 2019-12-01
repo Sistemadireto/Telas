@@ -1,0 +1,220 @@
+:host {
+  content {
+    include {
+      .hide {
+        display: none;
+        position: absolute;
+        visibility: hidden;
+        height: 0;
+        width: 0;
+      }
+
+      .menu {
+        position: relative;
+        padding-top: 36px;
+        height: calc(100% - 36px);
+        width: 200px;
+        background: rgba(255, 255, 255, 0.9);
+        float: left;
+
+        .now-playing {
+          background: rgba(195, 195, 255, 1);
+          position: absolute;
+          bottom: 0;
+          height: 180px;
+          width: 180px;
+          border-radius: 5px;
+          margin: 10px;
+        }
+      }
+
+      .navegador {
+        padding-top: 36px;
+        height: calc(100% - 36px);
+        width: calc(100% - 400px);
+        float: left;
+        background: rgba(255, 255, 255, 1);
+        position: relative;
+
+        .controls {
+          display: flex;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 90px;
+          background: rgba(255, 255, 255, 9);
+          border-top: 1px solid rgb(249, 249, 249);
+
+          .buttons {
+            height: 90px;
+            width: 90%;
+            position: relative;
+            margin: 0 auto;
+
+            .button-container {
+              display: flex;
+              margin: 0 auto;
+              width: 180px;
+              line-height: 50px;
+              padding-top: 8px;
+
+              i {
+                color: rgb(42, 36, 51);
+              }
+
+              .play-pause {
+                border: 2px solid rgb(42, 36, 51);
+                border-radius: 50%;
+                padding-top: 4px;
+                margin: 10px;
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                margin: 8px 10px 12px 10px;
+
+                i {
+                  font-size: 28px;
+                }
+              }
+
+              .backward,
+              .forward {
+                margin: 10px;
+                width: 40px;
+                height: 40px;
+                text-align: center;
+
+                i {
+                  font-size: 20px;
+                }
+              }
+            }
+
+            .progress-bar {
+              display: flex;
+              line-height: 15px;
+              text-align: center;
+
+              .current-time,
+              .duration {
+                flex: 1;
+                font-size: 12px;
+              }
+
+              .slidecontainer {
+                width: 100%;
+              }
+
+              .progress-slider[disabled] {
+                opacity: 0.6;
+              }
+
+              .progress-slider {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 90%;
+                height: 5px;
+                border-radius: 5px;
+                background-color: rgb(232, 232, 232);
+                outline: none;
+                margin: 5px auto;
+                display: block;
+              }
+
+              .progress-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: rgb(41, 32, 50);
+                cursor: pointer;
+              }
+
+              .progress-slider::-moz-range-thumb {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: rgb(41, 32, 50);
+                cursor: pointer;
+              }
+            }
+          }
+
+          .shuffle-repeat {
+            position: absolute;
+            left: 80px;
+            top: 28px;
+            width: 100px;
+            text-align: center;
+
+            i {
+              font-size: 20px;
+            }
+          }
+
+          .volume {
+            position: absolute;
+            right: 80px;
+            top: 28px;
+            width: 100px;
+
+            .slidecontainer {
+              width: 100%;
+            }
+
+            .volume-slider {
+              -webkit-appearance: none;
+              appearance: none;
+              width: 90%;
+              height: 5px;
+              border-radius: 5px;
+              background-color: rgb(232, 232, 232);
+              outline: none;
+              margin: 5px auto;
+              display: block;
+            }
+
+            .volume-slider::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              appearance: none;
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background-color: rgb(41, 32, 50);
+              cursor: pointer;
+            }
+
+            .volume-slider::-moz-range-thumb {
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background-color: rgb(41, 32, 50);
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .lateral {
+        color: #fff;
+        font-size: 12px;
+        height: 100%;
+        width: 200px;
+        float: left;
+        background-color: rgba(74, 87, 177, 0.9);
+        position: relative;
+
+        .filesSelected {
+          overflow-y: scroll;
+          position: absolute;
+          left: 0;
+          top: 46px;
+          right: 0;
+          bottom: 0;
+        }
+      }
+    }
+  }
+}

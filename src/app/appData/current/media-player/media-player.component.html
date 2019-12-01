@@ -1,0 +1,109 @@
+<toolbar>
+  <buttons>
+    <button (click)="input.click();" class="alt">
+      <i class="material-icons">note_add</i>
+      <div class="altInner">Add music</div>
+    </button>
+
+    <button (click)="closeApp('mediaPlayer');" class="alt">
+      <i class="material-icons">cancel</i>
+      <div class="altInner">Fechar</div>
+    </button>
+  </buttons>
+</toolbar>
+
+<content>
+  <include>
+
+    <video type="video" #video id="video" class="hide" preload="none" autoplay="true" [src]="videoSource"
+      [loop]="video.loop"></video>
+
+    <input #input class="hide" id="telasPlayer_upload" type="file" (change)="onFileChange($event)" multiple
+      accept=".x-m4a,.m4a,.wav,.mpeg,.x-ms-wma,.mp3,.vnd.dlna.adts,.ogg" />
+
+    <div class="menu">
+      <div class="now-playing"></div>
+    </div>
+
+    <div class="navegador">
+
+      <div class="browser">
+      </div>
+
+      <div class="controls">
+        <div class="buttons">
+          <div class="button-container">
+            <button class="backward" (click)="player('backward')">
+              <i class="material-icons">arrow_back</i>
+            </button>
+            <button class="play-pause" (click)="player('toggle')">
+              <i class="material-icons">{{ video.paused ? 'play_arrow' : 'pause' }}</i>
+            </button>
+            <button class="forward" (click)="player('forward')">
+              <i class="material-icons">arrow_forward</i>
+            </button>
+          </div>
+
+          <div class="progress-bar">
+            <div class="current-time">{{ timeConvert(video.currentTime) }}</div>
+            <div class="slidecontainer">
+              <input type="range" #progressSlider class="progress-slider" min="0" [max]="video.duration"
+                [value]="video.currentTime" (change)="(video.currentTime = progressSlider.value);"
+                [disabled]="(video.duration ? false : true)">
+            </div>
+            <div class="duration">{{ timeConvert(video.duration) }}</div>
+          </div>
+        </div>
+
+        <div class="shuffle-repeat">
+          <button (click)="video.loop ? false : true">
+            <i class="material-icons" [disabled]="video.loop">repeat</i>
+          </button>
+          <button (click)="shuffle ? false : true">
+            <i class="material-icons" [disabled]="shuffle">shuffle</i>
+          </button>
+        </div>
+
+        <div class="volume">
+          <div class="slidecontainer">
+            <input type="range" #volumeSlider class="volume-slider" min="0" max="1" [value]="video.volume"
+              (change)="(video.volume = volumeSlider.value);" step="0.1">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lateral">
+      <div class=filesSelected>
+        <ul>
+          <h2>playlist</h2>
+          <li *ngFor="let audio of data ">
+            <div>{{ audio.title }}</div>
+            <div>
+              <button (click)="startPlay(audio.filename)">
+                <i class="material-icons">play_arrow</i>
+              </button>
+              <button (click)="delFile(audio.key)">
+                <i class="material-icons">delete</i>
+              </button>
+            </div>
+            <br>
+            <br>
+          </li>
+        </ul>
+
+        <ul *ngIf="filesSelected">
+          <h2>Queue</h2>
+          <li *ngFor="let audio of uploadProgress$ | keyvalue">
+            <div>id: {{ audio.value.id }}</div>
+            <div>{{ audio.value.filename }}</div>
+            <div>{{ audio.value.progress }}%</div>
+            <br>
+            <br>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </include>
+</content>

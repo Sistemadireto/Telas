@@ -1,0 +1,34 @@
+<content>
+  <form novalidate="" action="">
+    <div class="back"></div>
+    <div class="left">
+      <div class="top">
+        <div><img alt="Telas360" src="../../../assets/img/favicon.png"></div>
+        <h1 class="title">Telas 360</h1>
+      </div>
+      <div class="bottom">
+        <div class="buttons">
+          <button type="button" (click)="authService.GoogleAuth();"></button>
+        </div>
+        <div>
+          <div><span>Entrar com o Google.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="top">
+        <h2>Faça login para entrar</h2>
+      </div>
+      <div class="bottom">
+        <div><input type="text" class="formControl" placeholder="Username" #userName required></div>
+        <div><input type="password" class="formControl" placeholder="Password" #userPassword required></div>
+        <div><input type="button" class="btn btnPrimary" value="Log in"
+            (click)="authService.SignIn(userName.value, userPassword.value)"></div>
+        <div><a href="" routerLink="/forgot-password">Esqueceu a senha?</a></div>
+        <div><a href="" routerLink="/register-user">Ainda não tem uma conta?</a></div>
+      </div>
+    </div>
+  </form>
+
+  <footer>Telas360 © 2019 | wmsDesign</footer>
+</content>

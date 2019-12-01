@@ -1,0 +1,34 @@
+<div class="appTitle">Configurações</div>
+
+<toolbar>
+  <buttons>
+    <button class="alt" (click)="loadComponent(0)">
+      <i class="material-icons">apps</i>
+      <div class="altInner">Apps</div>
+    </button>
+    <!--
+    <button class="alt" (click)="loadComponent(1)">
+      <i class="material-icons">notifications</i>
+      <div class="altInner">Notificações</div>
+    </button>
+    -->
+    <button class="alt" (click)="loadComponent(2)">
+      <i class="material-icons">person</i>
+      <div class="altInner">Perfil</div>
+    </button>
+    <!--
+    <button class="alt" (click)="loadComponent(3)">
+      <i class="material-icons">color_lens</i>
+      <div class="altInner">Personalizar</div>
+    </button>
+    -->
+    <button class="alt" (click)="closeApp('system');">
+      <i class="material-icons">cancel</i>
+      <div class="altInner">Fechar</div>
+    </button>
+  </buttons>
+</toolbar>
+
+<content>
+  <include ad-host></include>
+</content>

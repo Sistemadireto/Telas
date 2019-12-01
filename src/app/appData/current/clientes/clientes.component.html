@@ -1,0 +1,167 @@
+<div class="appTitle">Clientes | total: {{ (data)?.length }}</div>
+
+<toolbar>
+  <buttons>
+    <button class="alt" (click)="newData={viewMode:'search'};">
+      <i class="material-icons">search</i>
+      <div class="altInner">Procurar</div>
+    </button>
+    <button class="alt" (click)="newData={viewMode:'addClient'};">
+      <i class="material-icons">person_add</i>
+      <div class="altInner">+ Cliente</div>
+    </button>
+    <button class="alt" (click)="newData={viewMode:'config'};">
+      <i class="material-icons">build</i>
+      <div class="altInner">Ajustes</div>
+    </button>
+    <button (click)="closeApp('clientes');" class="alt">
+      <i class="material-icons">cancel</i>
+      <div class="altInner">Fechar</div>
+    </button>
+  </buttons>
+</toolbar>
+
+<content>
+  <include>
+    <div class="bottom" [class.blured]="newData.viewMode">
+      <div *ngIf="(data)?.length === 0">Não foi possível encontrar.</div>
+      <div class="client" *ngFor="let client of data" (click)="show(client);">
+        <div class="circle" [ngClass]="[client.name | color]">{{ client.name || '(Sem nome)'  | iniciais }}</div>
+        <div class="user">
+          <div class="name">{{ client.name || '(Sem nome)' | slice:0:30 }}</div>
+          <div class="cpf">{{ client.cpf || '(vazio)' | mask: '000.000.000-99' }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="addClient" *ngIf="newData.viewMode">
+      <div class="box">
+        <div class="left">
+          <button (click)="newData = { viewMode: null };">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        </div>
+
+        <div class="right">
+
+          <!-- CONFIG -->
+          <div *ngIf="newData.viewMode == 'config'">
+            <b class="title">Ajustes</b>
+
+            <mat-list>
+              <h3 mat-subheader>Folders</h3>
+              <mat-list-item>
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <h4 mat-line>name</h4>
+                <p mat-line class="demo-2"> title </p>
+                <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <h3 mat-subheader>Notes</h3>
+              <mat-list-item>
+                <mat-icon mat-list-icon>note</mat-icon>
+                <h4 mat-line>name</h4>
+                <p mat-line class="demo-2"> title </p>
+              </mat-list-item>
+            </mat-list>
+          </div>
+
+          <!-- SEARCH -->
+          <div *ngIf="newData.viewMode == 'search'" class="search">
+            <b class="title">Procurar</b>
+            <p>Digite o nome abaixo:</p>
+            <mat-form-field>
+              <input matInput [(ngModel)]="searchText" placeholder="Procurar por:">
+            </mat-form-field>
+            <button mat-icon-button color="primary" (click)="goSearch()">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+
+          <!-- DETAILS -->
+          <div *ngIf="newData.viewMode == 'details'" class="details">
+            <b class="title">Cliente</b>
+            <form #f="ngForm" (ngSubmit)="editClient(f, 'teste')">
+              <mat-form-field>
+                <input matInput name="name" ngModel required #name="ngModel" [(ngModel)]="newData.clientData.name"
+                  placeholder="Nome">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput name="cpf" ngModel required #cpf="ngModel" [(ngModel)]="newData.clientData.cpf"
+                  placeholder="CPF" mask="000.000.000-00">
+              </mat-form-field>
+              <button mat-stroked-button color="primary" type="submit" [disabled]="f.invalid">Salvar</button>
+              <button mat-stroked-button color="warn" (click)="newData.viewMode = 'confirmDel';">
+                Excluir cliente
+              </button>
+              <button mat-raised-button color="primary" (click)="addRecipe();"> + Receita </button>
+            </form>
+
+            <mat-list *ngIf="newData.clientData.receitas && newData.clientData.receitas[0]">
+              <h3 mat-subheader>Receitas</h3>
+              <mat-list-item *ngFor="let receita of newData.clientData.receitas" (click)="showRecipe(receita.file)">
+                <mat-icon mat-list-icon>assignment</mat-icon>
+                <h4 mat-line>Data: <b>{{ dateConverter(receita.data) | date : 'dd/MM/yyyy' }}</b></h4>
+                <p mat-line>Retorno: <b>{{ dateConverter(receita.dataRetorno) | date : 'dd/MM/yyyy' }}</b></p>
+              </mat-list-item>
+            </mat-list>
+
+          </div>
+
+          <!-- ADD CLIENT -->
+          <form *ngIf="newData.viewMode=='addClient'" #f="ngForm" (ngSubmit)="addClient(f)">
+            <b class="title">Novo cliente</b>
+            <p>Preencha corretamente</p>
+            <mat-form-field>
+              <input type="text" matInput name="name" ngModel required #name="ngModel" placeholder="Nome"
+                [(ngModel)]="docnewData.name">
+            </mat-form-field>
+            <mat-form-field>
+              <input type="text" matInput name="cpf" ngModel required #cpf="ngModel" placeholder="CPF"
+                [(ngModel)]="docnewData.cpf" mask="000.000.000-00">
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Salvar</button>
+          </form>
+
+          <!-- SENDING -->
+          <div *ngIf="newData.viewMode == 'sending'">
+            <b class="title">Enviando..</b>
+            <p>Aguarde o final do carregamento</p>
+            <h3>{{ percent }}{{ percent ? '% ' : '' }}</h3>
+          </div>
+
+          <!-- NOVA RECEITA -->
+          <form *ngIf="newData.viewMode == 'addRecipe'" #f="ngForm" (ngSubmit)="newRecipe(f)">
+            <b class="title">Nova receita</b>
+            <p>{{ newData.clientData.name }} - {{ newData.clientData.cpf | mask: '000.000.000-99' }}</p>
+            <input name="file" name="file" ngModel required #file="ngModel" type="file"
+              accept=".pdf,.rtf,.plain,.png,.jpeg,.jpg,.bmp,.gif" (change)="onFileChange($event)" />
+            <mat-form-field>
+              <input matInput name="data" ngModel required #data="ngModel" [matDatepicker]="pickData"
+                placeholder="Data">
+              <mat-datepicker-toggle matSuffix [for]="pickData"></mat-datepicker-toggle>
+              <mat-datepicker #pickData></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="dataRetorno" ngModel required #dataRetorno="ngModel"
+                [matDatepicker]="pickDataRetorno" placeholder="Retorno">
+              <mat-datepicker-toggle matSuffix [for]="pickDataRetorno"></mat-datepicker-toggle>
+              <mat-datepicker #pickDataRetorno></mat-datepicker>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="newData.viewMode = 'details'">Voltar</button>
+            <button mat-stroked-button color="primary" type="submit" [disabled]="f.invalid">Salvar</button>
+          </form>
+
+          <!-- CONFIRM DEL -->
+          <div *ngIf="newData.viewMode == 'confirmDel'">
+            <b class="title">Esta ação não pode ser desfeita.</b>
+            <p>Deseja realmente excluir as informações deste cliente?</p>
+            <button mat-raised-button color="primary" (click)="newData.viewMode = 'details'">Não</button>
+            <button mat-stroked-button color="warn" (click)="delClient(newData.clientData)">SIM</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </include>
+</content>

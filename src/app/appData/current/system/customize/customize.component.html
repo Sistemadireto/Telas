@@ -1,0 +1,13 @@
+<include>
+  <p>
+    customize works!
+  </p>
+  <div>
+    <form [formGroup]="customizeForm">
+      <label>bgOptions: </label>
+      <select formControlName="bgControl">
+        <option [ngValue]="bg" *ngFor="let bg of bgOptions">{{bg.name}}</option>
+      </select>
+    </form>
+  </div>
+</include>
