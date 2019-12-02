@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
 export interface AppData {
+  user: any;
   appList: Array<any>;
   appsOpened: Array<any>;
   appSettings: {
@@ -21,7 +22,7 @@ export interface AppData {
     preferences: {
       style: {
         background: number;
-        bgOptions: any
+        bgOptions: any;
       }
     }
   };
@@ -32,9 +33,9 @@ export interface AppData {
 })
 
 export class AppDataService {
-  user = JSON.parse(localStorage.getItem('userData'));
 
   appData: AppData = {
+    user: JSON.parse(localStorage.getItem('userData')),
     appList: [],
     appsOpened: ['dcb'],
     appSettings: {
@@ -68,6 +69,7 @@ export class AppDataService {
     public afs: AngularFirestore,
     public router: Router
   ) {
+    this.appData.user = JSON.parse(localStorage.getItem('userData'));
     this.appData = this.getLocalData();
   }
 
@@ -103,7 +105,7 @@ export class AppDataService {
   }
 
   public getAppData({ col, orderBy, startCol, doc }: { doc?: any, col: any; orderBy: any; startCol?: any; }) {
-    const start = startCol && doc ? `${startCol}/${doc}/${col}` : `userData/${this.user.uid}/${col}`;
+    const start = startCol && doc ? `${startCol}/${doc}/${col}` : `userData/${this.appData.user.uid}/${col}`;
     return this.afs.collection(start,
       ref => ref.orderBy(orderBy) // .limit(limit)
     ).snapshotChanges().pipe(map(changes => {
@@ -114,19 +116,19 @@ export class AppDataService {
   }
 
   delAppData(app: string, key: string) {
-    return this.afs.collection(`userData/${this.user.uid}/${app}`).doc(key).delete();
+    return this.afs.collection(`userData/${this.appData.user.uid}/${app}`).doc(key).delete();
   }
 
   setAppData(app: string, data: any) {
-    return this.afs.collection(`userData/${this.user.uid}/${app}`).add(data);
+    return this.afs.collection(`userData/${this.appData.user.uid}/${app}`).add(data);
   }
 
   updateAppData({ app, key, data }: { app: any; key: any; data: any; }) {
-    return this.afs.collection(`userData/${this.user.uid}/${app}`).doc(key).update(data);
+    return this.afs.collection(`userData/${this.appData.user.uid}/${app}`).doc(key).update(data);
   }
 
   setSubCollection({ app, key, data }: { app: string, key: string, data: any }) {
-    return this.afs.collection(`userData/${this.user.uid}/${app}/`).doc(key).set(data, { merge: true });
+    return this.afs.collection(`userData/${this.appData.user.uid}/${app}/`).doc(key).set(data, { merge: true });
   }
 
   getLocalData() {
