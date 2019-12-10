@@ -1,13 +1,36 @@
-<div class="expenseTitle">
-  <div class="menu">
-    <div>Perfil padrão</div>
-    <button>
-      <i class="material-icons-round">keyboard_arrow_down</i>
-    </button>
+<div class="menu" [ngClass]="{true:'open',false:'closed'}[config.menuToggle]"
+  (click)="config.menuToggle = config.menuToggle == false ? true : false;">
+  <div class="menuOtions">
+    <div [ngClass]="{true:'selected'}[config.profile[0]==1]" (click)="config.profile=[1,'Perfil padrão']">
+      <div>Perfil padrão</div>
+      <button>
+        <i class="material-icons-round">keyboard_arrow_right</i>
+      </button>
+    </div>
+    <div [ngClass]="{true:'selected'}[config.profile[0]==2]" (click)="config.profile=[2,'Casa']">
+      <div>Casa</div>
+      <button>
+        <i class="material-icons-round">keyboard_arrow_right</i>
+      </button>
+    </div>
+    <div [ngClass]="{true:'selected'}[config.profile[0]==3]" (click)="config.profile=[3,'Empresa']">
+      <div>Empresa</div>
+      <button>
+        <i class="material-icons-round">keyboard_arrow_right</i>
+      </button>
+    </div>
   </div>
+  <div class="title">
+    <div>
+      <div>{{ {true:'Editar', false: config.profile[1] }[config.menuToggle] }}</div>
+      <button>
+        <i class="material-icons-round">{{ {true: 'create', false: 'keyboard_arrow_down' }[config.menuToggle] }}</i>
+      </button>
+    </div>
+  </div>
+</div>
 
-  <br>
-
+<div class="expenseTitle">
   <div class="month">
     <button (click)="month('today')">
       <i class="material-icons-round">today</i>
@@ -16,7 +39,7 @@
       <i class="material-icons-round">keyboard_arrow_left</i>
     </button>
     <div class="title">
-      <span>{{ config.date.months[config.date.selected.month] }} - {{ config.date.selected.year }}</span>
+      <span>{{ config.date.months[config.date.selected.month] }}/{{ config.date.selected.year }}</span>
     </div>
     <button (click)="month('plus')">
       <i class="material-icons-round">keyboard_arrow_right</i>
@@ -53,7 +76,7 @@
   <include [ngClass]="{'home':'low', 'edit':'high', 'help':'high'}[config.viewMode]">
     <div *ngIf="config.viewMode=='home'">
       <div class="top">
-        <div class="left">
+        <div class="flex">
           <button class="ico">
             <i class="material-icons-outlined">work_outline</i>
           </button>
@@ -65,7 +88,19 @@
 
         <div class="separator"></div>
 
-        <div class="right">
+        <div class="flex">
+          <button class="ico">
+            <i class="material-icons-outlined">account_balance_wallet</i>
+          </button>
+          <div>
+            <span class="title">Balanço</span>
+            <div class="value">R$ 1.234,00</div>
+          </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="flex">
           <button class="ico">
             <i class="material-icons-outlined">account_balance_wallet</i>
           </button>
@@ -102,7 +137,7 @@
 
     <div *ngIf="config.viewMode=='edit'">
       <div class="top">
-        <div class="center">
+        <div class="flex">
           <button class="ico">
             <i class="material-icons-outlined">build</i>
           </button>
@@ -116,7 +151,7 @@
 
     <div *ngIf="config.viewMode=='help'">
       <div class="top">
-        <div class="center">
+        <div class="flex">
           <button class="ico">
             <i class="material-icons-outlined">help</i>
           </button>

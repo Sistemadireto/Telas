@@ -10,6 +10,8 @@ import { Data } from './expenseData';
 
 export class ExpenseComponent implements OnInit {
 
+  now = new Date();
+
   data = [
     new Data('b_orange', '2020-1-1', 'local_shipping', 'Windstorm', 'descrição', 3000),
     new Data('b_blue01', '2020-1-1', 'local_gas_station', 'Bombasto', 'descrição', 30),
@@ -62,19 +64,23 @@ export class ExpenseComponent implements OnInit {
 
   config: any = {
     viewMode: 'home',
+    menuToggle: false,
+    profile: ['standard', 'Perfil padrão'],
     date: {
       months: ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'],
       week: ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'],
       selected: {
-        day: 28,
-        month: 10,
-        year: 2019,
-        week_day: 2
+        day: this.now.getDate(),
+        month: this.now.getMonth(),
+        year: this.now.getFullYear(),
+        week_day: this.now.getDay()
       },
-      day: 28,
-      month: 10,
-      year: 2019,
-      week_day: 2
+      today: {
+        day: this.now.getDate(),
+        month: this.now.getMonth(),
+        year: this.now.getFullYear(),
+        week_day: this.now.getDay()
+      }
     }
   };
 
@@ -84,14 +90,13 @@ export class ExpenseComponent implements OnInit {
     };
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   month(args: any) {
     if (args == 'today') {
-      this.config.date.selected.year = this.config.date.year;
-      this.config.date.selected.month = this.config.date.month;
-      this.config.date.selected.day = this.config.date.day;
+      this.config.date.selected.year = this.config.date.today.year;
+      this.config.date.selected.month = this.config.date.today.month;
+      this.config.date.selected.day = this.config.date.today.day;
     }
     if (args == 'plus') {
       this.config.date.selected.month += 1;
@@ -106,6 +111,7 @@ export class ExpenseComponent implements OnInit {
         this.config.date.selected.month = 11;
       }
     }
+    console.log(this.config.date.selected);
   }
 
   closeApp(key: string) {

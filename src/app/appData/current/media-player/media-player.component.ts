@@ -8,19 +8,19 @@ import { AppDataService } from 'src/app/shared/services/app-data.service';
 })
 export class MediaPlayerComponent implements OnInit {
   video: HTMLVideoElement;
-  @ViewChild('video') set VideoEl(el: ElementRef) {
+  @ViewChild('video', { static: false }) set VideoEl(el: ElementRef) {
     this.video = el.nativeElement;
   }
   input: HTMLInputElement;
-  @ViewChild('input') set InputFileEl(el: ElementRef) {
+  @ViewChild('input', { static: false }) set InputFileEl(el: ElementRef) {
     this.input = el.nativeElement;
   }
   progressSlider: HTMLInputElement;
-  @ViewChild('progressSlider') set ProgressSliderEl(el: ElementRef) {
+  @ViewChild('progressSlider', { static: false }) set ProgressSliderEl(el: ElementRef) {
     this.progressSlider = el.nativeElement;
   }
   volumeSlider: HTMLInputElement;
-  @ViewChild('volumeSlider') set VolumeSliderEl(el: ElementRef) {
+  @ViewChild('volumeSlider', { static: false }) set VolumeSliderEl(el: ElementRef) {
     this.volumeSlider = el.nativeElement;
   }
   myFileList: any = [];

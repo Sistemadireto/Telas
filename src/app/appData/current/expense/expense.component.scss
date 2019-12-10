@@ -49,7 +49,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: 34px;
     color: #fff;
     font-size: 0.8rem;
     text-align: center;
@@ -60,16 +60,6 @@
       i {
         color: white;
       }
-    }
-
-    .menu {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 0 0 18px 18px;
-      line-height: 34px;
-      padding: 0 12px;
-      color: white;
-      font-size: 12px;
-      display: inline-flex;
     }
 
     .month {
@@ -83,6 +73,69 @@
       .title {
         text-transform: capitalize;
         width: 150px;
+      }
+    }
+  }
+
+  .menu.open {
+    background: rgb(41, 96, 158);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .menu {
+    transform: translate3d(0, calc(-100% + 34px), 0);
+    transition: all 0.25s cubic-bezier(0, 0, 0.2, 1) 0s;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 18px 18px;
+    line-height: 34px;
+    font-size: 12px;
+    display: block;
+    margin: 0 auto;
+    width: 128px;
+    position: absolute;
+    z-index: 99999999;
+    text-align: center;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+
+    .menuOtions {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0 0 2px 0;
+      margin: 0 0 2px 0;
+
+      > *:hover,
+      .selected {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      > * {
+        color: white;
+        display: inline-flex;
+        padding: 0 12px;
+        width: calc(100% - 24px);
+
+        button {
+          color: white;
+          flex: auto;
+          text-align: right;
+        }
+      }
+    }
+
+    .title {
+      > * {
+        color: white;
+        display: inline-flex;
+        padding: 0 12px;
+        width: calc(100% - 24px);
+
+        button {
+          color: white;
+          flex: auto;
+          text-align: right;
+        }
       }
     }
   }
@@ -110,8 +163,7 @@
         padding: 0 0 3px 0;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-        .right,
-        .left {
+        .flex {
           width: calc(50% - 0.5px);
         }
 
@@ -119,8 +171,7 @@
           margin: 0 auto;
         }
 
-        .right,
-        .left,
+        .flex,
         .center {
           display: flex;
 

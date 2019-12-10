@@ -16,7 +16,7 @@ import { CustomizeComponent } from './customize/customize.component';
 export class SystemComponent implements OnInit {
 
   @Input() ads: AdItem[];
-  @ViewChild(AdDirective) adHost: AdDirective;
+  @ViewChild(AdDirective, { static: false }) adHost: AdDirective;
 
   constructor(
     public appDataService: AppDataService,
