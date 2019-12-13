@@ -104,8 +104,14 @@ export class AppDataService {
     localStorage.setItem('appData', JSON.stringify(this.appData));
   }
 
+  getData() {
+    localStorage.getItem('appData');
+  }
+
   public getAppData({ col, orderBy, startCol, doc }: { doc?: any, col: any; orderBy: any; startCol?: any; }) {
-    const start = startCol && doc ? `${startCol}/${doc}/${col}` : `userData/${this.appData.user.uid}/${col}`;
+
+    const start = startCol && doc ? `${startCol}/${doc}/${col}` : `userData/${JSON.parse(localStorage.getItem('userData')).uid}/${col}`;
+
     return this.afs.collection(start,
       ref => ref.orderBy(orderBy) // .limit(limit)
     ).snapshotChanges().pipe(map(changes => {

@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/6dbe6fcc-9b46-4698-973e-9e921c5f6003/resourceGroups/Telas360/providers/Microsoft.Web/sites/Telas360",
+  "appService.deploySubpath": "dist/telas360"
+}

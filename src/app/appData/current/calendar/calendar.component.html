@@ -1,66 +1,62 @@
 <toolbar>
-  <buttons>
-    <button class="alt" (click)="newEvent();">
+    <buttons>
+        <button class="alt" (click)="newEvent();">
       <i class="material-icons">add_box</i>
       <div class="altInner">Adicionar</div>
     </button>
-    <button class="alt" (click)="genMonth(time.getDate(), time.getMonth(), time.getFullYear());">
+        <button class="alt" (click)="month('today');">
       <i class="material-icons">today</i>
       <div class="altInner">Hoje</div>
     </button>
-    <button class="alt" (click)="closeApp('calendar');">
+        <button class="alt" (click)="closeApp('calendar');">
       <i class="material-icons">cancel</i>
       <div class="altInner">Fechar</div>
     </button>
-  </buttons>
+    </buttons>
 </toolbar>
 
 <content>
-  <include>
+    <include>
 
-    <div class="month_year" [class.hide]="popup=='month'" (click)="change('month')">
-      <div class="mmyySelect" [class.hide]="popup=='month'" *ngIf="popup=='month_year'">month_year</div>
-    </div>
+        <div class="month_year" [class.hide]="popup=='month'" (click)="change('month')">
+            <div class="mmyySelect" [class.hide]="popup=='month'" *ngIf="popup=='month_year'">month_year</div>
+        </div>
 
-    <div class="mes" [class.hide]="popup=='month_year'">
-      <div class="title">
-        <span (click)="change('month_year')">{{ monthName[selected.month] }}, {{ selected.year }}</span>
-      </div>
-      <div class="days">
-        <div class="weekName day" *ngFor="let x of weekNameAbbr; let i=index;"
-          [class.selected]="time.getDay() == i && selected.month == time.getMonth() && selected.year == time.getFullYear()">
-          {{x}}
-        </div>
-        <div class="day" *ngFor="let x of days; let i=index;"
-          [class.active]="x['dd'] == selected.day && x['mm'] == selected.month && x['yy'] == selected.year"
-          [class.selected]="x['dd'] == time.getDate() && x['mm'] == time.getMonth() && x['yy'] == time.getFullYear()"
-          [ngClass]="x['mm'] != selected.month ? 'other' : ''" (click)="toDate(x);">
-          <div class="circle">{{ x['dd'] }}</div>
-        </div>
-      </div>
-      <button class="back" (click)="genMonth(1, selected.month - 1, selected.year)">
+        <div class="mes" [class.hide]="popup=='month_year'">
+            <div class="title">
+                <span (click)="change('month_year')">{{ monthName[selected.month] }}, {{ selected.year }}</span>
+            </div>
+            <div class="days">
+                <div class="weekName day" *ngFor="let x of weekNameAbbr; let i=index;" [class.selected]="now.getDay() == i && selected.month == now.getMonth() && selected.year == now.getFullYear()">
+                    {{x}}
+                </div>
+                <div class="day" *ngFor="let x of days; let i=index;" [class.active]="x['dd'] == selected.day && x['mm'] == selected.month && x['yy'] == selected.year" [class.selected]="x['dd'] == now.getDate() && x['mm'] == now.getMonth() && x['yy'] == now.getFullYear()"
+                    [ngClass]="x['mm'] != selected.month ? 'other' : ''" (click)="toDate(x);">
+                    <div class="circle">{{ x['dd'] }}</div>
+                </div>
+            </div>
+            <button class="back" (click)="month('minus')">
         <i class="material-icons">keyboard_arrow_left</i>
       </button>
-      <button class="next" (click)="genMonth(1, selected.month + 1, selected.year)">
+            <button class="next" (click)="month('plus')">
         <i class="material-icons">keyboard_arrow_right</i>
       </button>
-    </div>
-
-    <div class="lateral" [class.hide]="popup=='month_year'">
-      <div class="title">Eventos</div>
-      <div class="selectedDate">{{ selected.day }} / {{ selected.month + 1 }} / {{ selected.year }}</div>
-      <div class="events">
-
-        <div class="event" *ngFor="let entry of date">
-          {{ entry.datetime }}h:
-          <br>
-          {{ entry.title }}
-          <br>
-
-          <hr>
         </div>
-      </div>
-    </div>
 
-  </include>
-</content>
+        <div class="lateral" [class.hide]="popup=='month_year'">
+            <div class="title">Eventos</div>
+            <div class="selectedDate">{{ selected.day }} / {{ selected.month + 1 }} / {{ selected.year }}</div>
+            <div class="events">
+
+                <div class="event" *ngFor="let entry of date">
+                    {{ entry.datetime }}h:
+                    <br> {{ entry.title }}
+                    <br>
+
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+    </include>
+</content>đ

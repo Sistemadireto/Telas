@@ -1,4 +1,4 @@
-<div class="menu" [ngClass]="{true:'open',false:'closed'}[config.menuToggle]"
+<div class="menu" [ngClass]="[{true:'open',false:'closed'}[config.menuToggle], config.viewMode]"
   (click)="config.menuToggle = config.menuToggle == false ? true : false;">
   <div class="menuOtions">
     <div [ngClass]="{true:'selected'}[config.profile[0]==1]" (click)="config.profile=[1,'Perfil padrão']">
@@ -82,7 +82,7 @@
           </button>
           <div>
             <span class="title">Saldo</span>
-            <div class="value">R$ 1.234,00</div>
+            <div class="value">R$ 1.500,00</div>
           </div>
         </div>
 
@@ -102,11 +102,11 @@
 
         <div class="flex">
           <button class="ico">
-            <i class="material-icons-outlined">account_balance_wallet</i>
+            <i class="material-icons-outlined">note_add</i>
           </button>
-          <div>
-            <span class="title">Balanço</span>
-            <div class="value">R$ 1.234,00</div>
+          <div class="pointer">
+            <span class="title">Adicionar</span>
+            <div class="value">Nova nota</div>
           </div>
         </div>
       </div>
